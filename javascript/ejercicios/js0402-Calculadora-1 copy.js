@@ -1,6 +1,14 @@
 "use strict";
 const prompt = require('prompt-sync')();
 
+const operaciones = new Map(Object.entries({
+    s: sumar,
+    r: restar,
+    f: factorial,
+    q: fin = true
+}))
+
+
 let acumulador = 0;
 
 
@@ -18,12 +26,10 @@ function mostar_menu(){
 
 function menu_calculadora(){
     let fin = false;
-
-    
-    while(!fin) {
+        while(!fin) {
         console.log("Acumulador: " + acumulador);
         mostar_menu();
-        let opcion = prompt('Opcion : ');
+        const opcion = prompt('Opcion : ');
         let y = 0;
 
         switch(opcion){
@@ -39,7 +45,7 @@ function menu_calculadora(){
                 acumulador = factorial(acumulador);
                 break;
             case 'q':
-                fin = true;
+                
                 break;
         }
     }
@@ -65,3 +71,4 @@ function factorial(x){
         return x * factorial(x - 1);
     }
 }
+
