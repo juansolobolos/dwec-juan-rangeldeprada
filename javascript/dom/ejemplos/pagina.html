@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- defer hace que el script no se ejecute hasta que se ejecute cargue el resto de la pagina. seria equivalente 
+    a poner el script al final del codigo -->
+
+    <!-- añadir los script en la cabecera se hace por temas de optimizacion. se empezaran a descargar antes que nada y cuando se 
+    deban ejecutar ya estaran disponibles, ahorrando tiempos de carga -->
+    <script src="pagina.js" defer></script>
+    <script src="pagina2.js" defer></script>
+    <script src="pagina-eventos.js" defer></script>
+</head>
+<body>
+    <div id="hola">
+        <p>Texto1</p>
+        <p>Texto2</p>
+        <p id="texto3">Texto3</p>
+        <p>Texto4</p>
+    </div>
+    <p id="parrafo2">Parrafo 2</p>
+
+    <input name="nombre" type="text"/>
+    <button id="boton1">Boton1</button>
+
+    
+    <!-- los Script deben escribirse como minimo por debajo del elemento al cual referencian. a menos que usemos un defer -->
+    <!-- <script>
+        const dovHola = document.getElementById((hola))
+    </script> -->
+
+
+</body>
+</html>
