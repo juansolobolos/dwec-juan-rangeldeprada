@@ -1,4 +1,5 @@
-/* "use strict";
+"use strict";
+/* 
 const campoTexto = document.getElementById("entradaTexto");
 const campoNumero = document.getElementById("entradaNumero");
 
@@ -23,33 +24,70 @@ window.addEventListener("load", () => {
 
 }) */
 
-
-const validaciones{
-    entradaTexto : ,
-    entradaNumero : 
-}
-
 window.addEventListener("load", () => {
 
-    document.querySelector("form").addEventListener("focusout", (evento) =>{
-        
-        const input = evento.tager;
-        if (input.className.includes("Texto")){
+    document.querySelector("form").addEventListener(
+        "focusout", (evento) => {
             
-        } else if(input.className.includes("Numero")){
-            if(validarNumero(input.value))
+            // Obtengo el campo a validar
+            const input = evento.target;
+
+            // Obtengo la validación
+            const validacion = input.attributes['validacion'].value;
+
+            // Realiza la validación
+            if(validacion && validarCampo(validacion, input)) {
+                limpiarError(input);
+            } else {
+                mostrarError(input);
+            }    
         }
-    });
+    );
+
 });
 
-function mostrarError(){
 
+
+//--------------------------------------------------------------------
+// Funciones de GUI
+//--------------------------------------------------------------------
+
+function mostrarError(campo) {
+    campo.style.backgroundColor = "red";
 }
 
-function limpiarError(){
-
+function limpiarError(campo) {
+    campo.style.backgroundColor = "white";
 }
 
-function validarNumero(valor){
+//--------------------------------------------------------------------
+// Funciones de validación
+//--------------------------------------------------------------------
+function validarCampo(nombreValidacion, campo) {
+
+    // Obtengo el nombre de la función que voy a utilizar para validar
+    const nombreFuncionValidacion = "validar"+nombreValidacion;
+    const funcionValidacion = eval(nombreFuncionValidacion);
+
+    // Llama a la función para realizar la validación    
+    return funcionValidacion(campo.value);
+}
+
+//--------------------------------------------------------------------
+// Validaciones
+//--------------------------------------------------------------------
+function validarNumero(valor) {
     return !isNaN(valor);
+}
+
+function validarPar(valor) {
+    return valor % 2 == 0;
+}
+
+function validarNombre(valor) {
+    if(valor.lenght > 0){
+        return true;
+    }else{
+        return false;
+    }
 }
