@@ -26,7 +26,7 @@ window.addEventListener("load", () => {
 
 window.addEventListener("load", () => {
 
-    document.querySelector("form").addEventListener(
+    document.querySelectorAll("form").addEventListener(
         "focusout", (evento) => {
             
             // Obtengo el campo a validar
