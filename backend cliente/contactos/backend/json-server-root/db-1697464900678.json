@@ -13,14 +13,12 @@
       "Provincia": "Badajoz",
       "CP": "06006"
     }
-  ],
   "telefonos": [
     {
       "id": 1,
       "numero": "666 777 888",
       "contactoId": 1
     }
-  ],
   "correos": [
     {
       "id": "1",
