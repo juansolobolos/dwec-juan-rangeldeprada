@@ -1,4 +1,3 @@
-"use strict";
 window.addEventListener("load", () => {
     const helper = document.getElementById("helper");
     
