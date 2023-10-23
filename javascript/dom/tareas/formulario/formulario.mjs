@@ -29,6 +29,7 @@ function ayuda(evento){
 
 
 
+////////////Version anterior////////////////
 
 /* function ayuda(evento){
     let id = evento.target.id;

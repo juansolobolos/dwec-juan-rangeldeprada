@@ -1,12 +1,10 @@
-window.addEventListener("load", () => {
-    const helper = document.getElementById("helper");
+"use strict";
+$(document).ready( () => {
+    const helper = $("#helper");
     
     //Añadimos el metodo de validar a nuestros input con el evento blur. Uso blur en vez de focusout por que focus no burbujea    
-    document.querySelectorAll("input").forEach(element => {
-        element.addEventListener("blur", validar);
-    });
-
-    document.getElementById("accept").addEventListener("click", enviar);
+    $("input").on("blur", validar);
+    $("#accept").on("click", enviar);
 });
 
 ////////variables globales///////
@@ -83,30 +81,32 @@ function validar(evento){
     }  
 }
 
-
-
 //La funcion enviar comprobara la existencia de errores en el formulario y si no existen lo mandara 
-function enviar(){
-    //fallo me sirve para validar si se puede mandar el documento
+function enviar() {
+    
+    // fallo me sirve para validar si se puede mandar el formulario
     let fallo = false;
-    //recorremos los fallos, la variable gloval que declaramos antes, si hay un campo con error le dara un focus y saldra de el for.
+
+    // recorremos los fallos, la variable global que declaramos antes, si hay un campo con error le dará un focus y saldrá del bucle.
     for (const tipoerror in fallos) {
         if (fallos[tipoerror] === true) {
             fallo = true;
-            let campo = document.getElementById(tipoerror);
+            let campo = $(tipoerror);
             campo.focus();
             break;
         }
     }
-    //la validacion de contraseña la hago directamente en la funcion enviar
-    if(document.getElementById("password1").value != document.getElementById("password2").value){
+
+    // La validación de contraseñas la hago directamente en la función enviar
+    if ($("#password1").val() !== $("#password2").val()) {
         fallo = true;
-        document.getElementById("password1").focus();
-        document.getElementById("password1").style.backgroundColor = "red";
-        helper.innerText = "Ambas contraseñas deben ser iguales";
+        $("#password1").focus();
+        $("#password1").css("background-color", "red");
+        $("#helper").text("Ambas contraseñas deben ser iguales");
     }
-    //si no hay fallo hace el post
-    if(fallo == false){
-        document.getElementById("miFormulario").submit();
+
+    // Si no hay fallo, hace el envío del formulario
+    if (!fallo) {
+        $("#miFormulario").submit();
     }
 }

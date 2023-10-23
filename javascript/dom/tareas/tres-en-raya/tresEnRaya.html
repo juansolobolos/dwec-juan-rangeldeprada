@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        td{border: solid black; text-align: center; justify-content: center; width: 60px; height: 60px; font-size: x-large;}
+        #displayPuntos{font-size: larger; font-weight: bold;}
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="tresEnRaya.js" defer></script>
+
+</head>
+<body>
+    <div id="displayPuntos"></div>
+    <table>
+        <tr>
+            <td class="fila1 columna1 diagonal1"></td>
+            <td class="fila1 columna2"></td>
+            <td class="fila1 columna3 diagonal2"></td>
+        </tr>
+        <tr>
+            <td class="fila2 columna1"></td>
+            <td class="fila2 columna2 diagonal1 diagonal2"></td>
+            <td class="fila2 columna3"></td>
+        </tr>
+        <tr>
+            <td class="fila3 columna1 diagonal2"></td>
+            <td class="fila3 columna2"></td>
+            <td class="fila3 columna3 diagonal1"></td>
+        </tr>
+    </table>
+    <div id="displayTurno"></div>
+</body>
+</html>
