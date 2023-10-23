@@ -1,4 +1,8 @@
-<script type="module" src="html/contactos_todos.mjs"></script>
+<script type="module">
+  import * as contactosTodos from "/paginas/contactos/todos.mjs"
+
+  contactosTodos.init();
+</script>
 
 <!--Creo un contenedor fluido que se estira todo el ancho-->
 <div class="container-fluid m-3">
@@ -51,6 +55,7 @@
         </tr>
     </thead>
     <tbody id="tablaContactos">
+      <!--Aqui se insertan los resultados de la constulta-->
         <tr>
             <th scope="row">1</th>
             <td>Manolo</td>
@@ -64,12 +69,7 @@
     </tbody>
 </table>
 
-<nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-  </ul>
-</nav>
+<div id="paginador">
+  <!--El paginador se insertara aqui-->
+</div>
+
