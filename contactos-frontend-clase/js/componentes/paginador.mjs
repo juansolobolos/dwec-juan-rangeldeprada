@@ -29,8 +29,8 @@ function renderizar(idElemento, numeroPagina, onPaginaCambiada){
         __numeroPagina = numeroPagina;
 
         //gestores de evento
-        $('pgAnterior').on('click', onAnterior);
-        $('pgSiguiente').on('click', onSiguiente);
+        $('#pgAnterior').on('click', onAnterior);
+        $('#pgSiguiente').on('click', onSiguiente);
 
         //guardo el gestor de evento
         __onPaginaCambiada = onPaginaCambiada;
@@ -41,7 +41,6 @@ function renderizar(idElemento, numeroPagina, onPaginaCambiada){
 
 ///////////////////////////Funciones del componente///////////////////////////////////////
 function actualizarNumeroPagina(numeroPagina){
-    //puede que no sea esto
     $('#pgPaginaActiva').text(numeroPagina);
 }
 
@@ -53,14 +52,17 @@ function onAnterior(){
         //actualiza el html
         actualizarNumeroPagina(__numeroPagina);
         //invoca el envento
-        onPaginaCambiada(__numeroPagina);
+        __onPaginaCambiada(__numeroPagina);
     }
 }
 
 function onSiguiente(){
-    //
+    //Incrementa la página
     __numeroPagina++
 
+    // Actualiza el html
+    actualizarNumeroPagina(__numeroPagina);
 
+    // Invoca al evento
     __onPaginaCambiada(__numeroPagina++);
 }
