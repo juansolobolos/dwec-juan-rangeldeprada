@@ -44,9 +44,32 @@ function init() {
   // Inicializa los eventos
   document.getElementById("btBuscar").addEventListener("click", onBuscarClick);
   document.getElementById("btAnadir").addEventListener("click", onAnadirClick);
-  $('#tablaContactos').on('click', '[name=btEliminar]', (evento =>{
-    alert('hola');
-  }));
+  $('#tablaContactos').on('click', '[name=btEliminar]', (evento) =>{
+    
+    //obtengo el id del contacto a eliminar
+    const boton = evento.target;
+    
+    //obtengo el id del contacto a eliminar
+    const id = boton.value;
+
+    //Solicito confirmacion  del usuario
+    dialogo.mostrarPreguntaSiNo("Esta seguro de que desea eliminar el contacto selecttionado?",
+    () => {
+
+      //Eliminar el contacto
+      contactos.borrarContacto(id,
+        () =>{
+          
+          console.log("contacto eliminado")
+        },
+        () =>{
+          //Error borrando el contacto
+        }
+        )
+
+    });
+
+  });
 
   // Paginador
   paginador.renderizar("paginador", 1, onPaginaCambiada);

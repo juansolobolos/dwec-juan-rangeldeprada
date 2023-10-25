@@ -9,7 +9,8 @@ import * as http from "/js/biblioteca/http.mjs";
 // Exporta 
 export {
     getTodos,
-    buscarContactos
+    buscarContactos,
+    borrarContactos
 };
 
 //-----------------------------------------------------------------------------------
@@ -57,6 +58,21 @@ function buscarContactos(filtro, onOk, onError, pagina, registrosPorPagina = ent
 }
 
 
+/**
+ * 
+ * @param {*} id 
+ * @param {*} onOk 
+ * @param {*} onError 
+ */
+function borrarContactos(id, onOk, onError) {
+
+    const url = `${URL_CONTACTOS}/${id}`;
+
+    // Llama a descargar todos los contactos paginados
+    http.del(url, onOk, onError);
+}
+
+
 
 // Estilo Angular
 // Un método por consulta.
@@ -71,3 +87,5 @@ function buscarContactos(filtro, onOk, onError, pagina, registrosPorPagina = ent
 // Por nombre
 // Por apellidos
 
+//To do 
+//Constructo de errores por defecto

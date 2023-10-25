@@ -43,7 +43,7 @@ function _mostrarMensaje(mensaje){
  * @param {*} texto 
  * @param {*} onSi Callback a invocar 
  */
-function mostrarPreguntaSiNo(texto, onSi){
+function mostrarPreguntaSiNo(mensaje, onSi){
     //inyecta el codigo html en la pagina
     if (!$('#modalSiNo').length) {
         $('body').append(

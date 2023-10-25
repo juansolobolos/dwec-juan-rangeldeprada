@@ -1,7 +1,9 @@
 // Funciones realicionadas con el protocolo HTTP
 
 // Exportaciones
-export { get };
+export { get,
+del
+};
 
 /**
  * Método HTTP GET para descargar información paginada de un servidor
@@ -36,4 +38,21 @@ function get(url, onOk, onError, pagina, registrosPorPagina) {
         onOk(datos);
   });      
 
+}
+
+/**
+ * 
+ * @param {*} url 
+ * @param {*} onOk 
+ * @param {*} onError 
+ */
+function del(url, onOk, onError) {
+    fetch(
+        url,
+        {
+            method: 'DELETE'
+        }
+    
+    )
+    .then(respuesta => onOk());
 }
