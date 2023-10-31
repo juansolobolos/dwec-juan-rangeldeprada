@@ -10,7 +10,9 @@ import * as http from "/js/biblioteca/http.mjs";
 export {
     getTodos,
     buscarContactos,
-    borrarContactos
+    borrarContacto,
+    crearContacto,
+    actualizarContacto
 };
 
 //-----------------------------------------------------------------------------------
@@ -57,15 +59,16 @@ function buscarContactos(filtro, onOk, onError, pagina, registrosPorPagina = ent
     http.get(url, onOk, onError, pagina, registrosPorPagina);
 }
 
-
 /**
+ * Elim,ina el contacto pasado como argumento
  * 
  * @param {*} id 
  * @param {*} onOk 
  * @param {*} onError 
  */
-function borrarContactos(id, onOk, onError) {
+function borrarContacto(id, onOk, onError) {
 
+    // Monta la URL al recurso
     const url = `${URL_CONTACTOS}/${id}`;
 
     // Llama a descargar todos los contactos paginados
@@ -73,6 +76,38 @@ function borrarContactos(id, onOk, onError) {
 }
 
 
+/** 
+ * Crea un contando
+ * 
+ * @param {*} objeto 
+ * @param {*} onOk 
+ * @param {*} onError 
+ */
+function crearContacto(objeto, onOk, onError) {
+
+    // Monta la URL al recurso
+    const url = URL_CONTACTOS;
+
+    // Crea un contacto
+    http.post(url, objeto, onOk, onError);
+}
+
+
+/** MODIFICADO
+ * Actualiza el contacto pasado como argumento
+ * 
+ * @param {*} objeto 
+ * @param {*} onOk 
+ * @param {*} onError 
+ */
+function actualizarContacto(objeto, onOk, onError) {
+
+    // Monta la URL al recurso
+    const url = `${URL_CONTACTOS}/${objeto.id}`;
+
+    // Crea un contacto
+    http.put(url, objeto, onOk, onError);
+}
 
 // Estilo Angular
 // Un método por consulta.
@@ -87,5 +122,4 @@ function borrarContactos(id, onOk, onError) {
 // Por nombre
 // Por apellidos
 
-//To do 
-//Constructo de errores por defecto
+// TODO Gestor de errores por defecto

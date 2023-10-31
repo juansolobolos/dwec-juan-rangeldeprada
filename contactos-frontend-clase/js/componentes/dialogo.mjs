@@ -1,87 +1,87 @@
-//Funcuiones para crear cuadros de cialogo
+//--------------------------------------------------------------
+// Funciones para crear cuadros de diálogo.
+//--------------------------------------------------------------
 
-export{ mostrarMensaje, mostrarPreguntaSiNo};
-
+export { mostrarMensaje, mostrarPreguntaSiNo };
 
 /**
- * Muestra el cuadro de dialogo con un mensaje
+ * Muestra un cuadro de dialogo con un mensaje
  * 
- * @param {*} mensaje 
+ * @param {} mensaje 
  */
-function mostrarMensaje(mensaje){
-    //inyecta el codigo html en la pagina
-    if (!$('#modalMensaje').length) {
+function mostrarMensaje(mensaje) {
+    // Inyecta el Código HTML en la página
+    if(!$('#modalMensaje').length) {
         $('body').append(
             $('<div>').load(
-                //URL de la plantilla
-                URL_COMPONENTE_PLANTILLA("dialogo"),
-
-                //funcion callback que se invoca cuando finaliza la carga de la flantilla
+        
+                // URL de la plantilla
+                URL_COMPONENTE_PLANTILLLA("dialogo"),
+    
+                // Función callback que se invoca cuando finaliza la carga de la plantilla
                 () => {
-                    _mostrarMensaje(mensaje);
+                    _mostrarMensaje(mensaje);       
                 }
             )
-        );
-    }else{
-        //mostrar el mensaje
+        );    
+    } else {
+        // Mostrar el mensaje
         _mostrarMensaje(mensaje);
     }
-}
 
-function _mostrarMensaje(mensaje){
+    function _mostrarMensaje(mensaje) {
+        $('#modalMensaje .modal-body').text(mensaje);
 
-    //Muestra la ventana modal
-    $('#modalMensaje .modal-Body').text(mensaje);
-    $('#modalMensaje').modal('show');
-}
-
-
-
-/**
- * Muestra y cuadro de dialogo que pide confirmacion para llevar a cabo una accion
- * 
- * @param {*} texto 
- * @param {*} onSi Callback a invocar 
- */
-function mostrarPreguntaSiNo(mensaje, onSi){
-    //inyecta el codigo html en la pagina
-    if (!$('#modalSiNo').length) {
-        $('body').append(
-            $('<div>').load(
-                //URL de la plantilla
-                URL_COMPONENTE_PLANTILLA("dialogo"),
-
-                //funcion callback que se invoca cuando finaliza la carga de la flantilla
-                () => {
-                    _mostrarPreguntaSiNo(mensaje, onSi);
-                }
-            )
-        );
-    }else{
-        //mostrar el mensaje
-        _mostrarPreguntaSiNo(mensaje, onSi);
+        // Muestra la ventana modal
+        $('#modalMensaje').modal('show');
     }
 }
 
-function _mostrarPreguntaSiNo(mensaje, onSi){
+/**
+ * Muestra un cuadro de diálogo que pide confirmación para llevar a cabo una acción
+ * 
+ * @param {*} texto 
+ * @param {*} onSi Callback a invocar en caso de que se pulse en el si
+ */
+function mostrarPreguntaSiNo(mensaje, onSi) {
+    
+    // Inyecta el Código HTML en la página
+    if(!$('#modalSiNo').length) {
+        $('body').append(
+            $('<div>').load(
+        
+                // URL de la plantilla
+                URL_COMPONENTE_PLANTILLLA("dialogo"),
+    
+                // Función callback que se invoca cuando finaliza la carga de la plantilla
+                () => {
+                    _mostrarPreguntaSiNo(mensaje, onSi);       
+                }
+            )
+        );    
+    } else {
+        // Mostrar el mensaje
+        _mostrarPreguntaSiNo(mensaje, onSi);
+    }
 
-    //Asigna el texto a mostrar
-    $('#modalSiNo .modal-Body').text(mensaje);
+    function _mostrarPreguntaSiNo(mensaje, onSi) {
+        // Asigna el texto a mostrar         
+        $('#modalSiNo .modal-body').text(mensaje);
 
-    //Configuramos el boton aceptar
-    $('#modalSiNo [name=botonAceptar]').on("click",() => {
+        // Configuramos el botón aceptar
+        $('#modalSiNo [name=botonAceptar]').on('click', () => {
 
-        //llamar a la funcion
-        onSi();
+            // Llamar a la función
+            onSi();
 
+            // Desactivamos el gestor de evento
+            $('#modalSiNo [name=botonAceptar]').off('click');
+            
+            // Oculta el cuadro de dialogo
+            $('#modalSiNo').modal('hide');    
+        });
 
-        //desactivamos el gestor de eventos
-        $('#modalSiNo [name=botonAceptar]').off("click")
-
-        //ocultar el cuadro de dialogo
-        $('#modalSiNo').modal('hide');
-    });
-
-    //muestra la ventana modal
-    $('#modalSiNo').modal('show');
+        // Muestra la ventana modal
+        $('#modalSiNo').modal('show');
+    }
 }

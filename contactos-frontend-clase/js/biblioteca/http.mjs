@@ -1,8 +1,11 @@
 // Funciones realicionadas con el protocolo HTTP
 
 // Exportaciones
-export { get,
-del
+export { 
+    get,
+    del,
+    post,
+    put
 };
 
 /**
@@ -41,6 +44,7 @@ function get(url, onOk, onError, pagina, registrosPorPagina) {
 }
 
 /**
+ * Elimina un registro de la base de datos
  * 
  * @param {*} url 
  * @param {*} onOk 
@@ -52,7 +56,50 @@ function del(url, onOk, onError) {
         {
             method: 'DELETE'
         }
-    
-    )
-    .then(respuesta => onOk());
+    ) 
+    .then(respuesta => onOk());      
+}
+
+/**
+ * Añade un registro a la base de datos
+ * 
+ * @param {*} url 
+ * @param {*} objeto
+ * @param {*} onOk 
+ * @param {*} onError 
+ */
+function post(url, objeto, onOk, onError) {
+    fetch(
+        url,
+        {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(objeto)
+        }
+    ) 
+    .then(respuesta => onOk());      
+}
+
+/**
+ * Método utilizado para actualizar un contacto
+ * 
+ * @param {*} url 
+ * @param {*} objeto
+ * @param {*} onOk 
+ * @param {*} onError 
+ */
+function put(url, objeto, onOk, onError) {
+    fetch(
+        url,
+        {
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(objeto)
+        }
+    ) 
+    .then(respuesta => onOk());      
 }

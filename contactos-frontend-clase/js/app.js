@@ -7,6 +7,7 @@ const PAGINAS_ROOT = "paginas";
 const SERVICIOS_ROOT = "js/servicios";
 const COMPONENTES_ROOT = "js/componentes";
 
+
 //----------------------------------------------------------------------------
 // Funciones para calcular los nombres de los recursos
 //----------------------------------------------------------------------------
@@ -26,6 +27,7 @@ function URL_COMPONENTE_PLANTILLLA(nombre) {
     return `${COMPONENTES_ROOT}/${nombre}.html`
 }
 
+
 //----------------------------------------------------------------------------
 // Funciones de navegación por la aplicación
 //----------------------------------------------------------------------------
@@ -38,3 +40,4 @@ function URL_COMPONENTE_PLANTILLLA(nombre) {
 function appCargar(nombre) {
     $("#workspace").load(URL_PAGINA(nombre));
 }
+
