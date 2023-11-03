@@ -3,7 +3,6 @@
 // Permite trabajar con el recurso contactos.
 //-----------------------------------------------------------------------------------
 // Importa dependencias
-import * as entorno from "/entorno.mjs";
 import * as http from "/js/biblioteca/http.mjs";
 
 // Exporta 
@@ -21,7 +20,7 @@ export {
 /**
  * Url para acceder al recurso
  */
-const URL_CONTACTOS=`${entorno.URL_BASE}/contactos`;
+const URL_CONTACTOS=`${URL_BASE}/contactos`;
 
 //-----------------------------------------------------------------------------------
 // Implementación
@@ -35,7 +34,7 @@ const URL_CONTACTOS=`${entorno.URL_BASE}/contactos`;
  * @param {*} okError 
  * @param {*} pagina 
  */
-function getTodos(onOk, onError, pagina, registrosPorPagina = entorno.REGISTROS_POR_PAGINA) {
+function getTodos(onOk, onError, pagina, registrosPorPagina = REGISTROS_POR_PAGINA) {
 
     // Llama a descargar todos los contactos paginados
     http.get(URL_CONTACTOS, onOk, onError, pagina, registrosPorPagina);
@@ -51,7 +50,7 @@ function getTodos(onOk, onError, pagina, registrosPorPagina = entorno.REGISTROS_
  * @param {*} pagina 
  * @param {*} registrosPorPagina 
  */
-function buscarContactos(filtro, onOk, onError, pagina, registrosPorPagina = entorno.REGISTROS_POR_PAGINA) {
+function buscarContactos(filtro, onOk, onError, pagina, registrosPorPagina = REGISTROS_POR_PAGINA) {
 
     const url = `${URL_CONTACTOS}?q=${filtro}`;
 

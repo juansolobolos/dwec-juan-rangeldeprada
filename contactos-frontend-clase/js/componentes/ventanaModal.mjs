@@ -1,7 +1,8 @@
 
 // Exportaciones del módulo
 export {
-    mostrarVentanaModal
+    mostrarVentanaModal,
+    ocultarVentanaModal
 }
 
 /**
@@ -45,17 +46,22 @@ function mostrarVentanaModal(titulo, renderizarCallback, onAceptar = () => {}) {
         // Configuramos el botón aceptar
         $('#ventanaModal [name=botonAceptar]').on('click', () => {
 
-            // Llamar a la función            
+            // Llamar a la función
             onAceptar();
-
-            // Desactivamos el gestor de evento
-            $('#ventanaModal [name=botonAceptar]').off('click');
-            
-            // Oculta el cuadro de dialogo
-            $('#ventanaModal').modal('hide');    
         });
 
         // Muestra la ventana modal
         $('#ventanaModal').modal('show');
     }    
+}
+
+/**
+ * Esta función oculta la ventana modal. Debe ser invocada de forma explícita en estos momentos
+ */
+function ocultarVentanaModal() {
+    // Desactivamos el gestor de evento
+    $('#ventanaModal [name=botonAceptar]').off('click');
+    
+    // Oculta el cuadro de dialogo
+    $('#ventanaModal').modal('hide');    
 }

@@ -40,6 +40,7 @@
     </script>
 
     <!-- Dependencias de aplicación -->
+    <script src="/entorno.js" defer></script>
     <script src="js/app.js" defer></script>
 </head>
 <body>
@@ -90,5 +91,59 @@
         que forman la aplicación.
     -->
     <div id="workspace"></div>
+
+    <!-- HTML del cuadro de diálogo del login. Está cargado siempre en el cuerpo de la aplicación. -->
+    <div id="loginModal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Inicio de sesión</h1>
+                </div>
+                <div id="loginCuerpo" class="modal-body">
+       
+                    <div class="mx-auto">     
+
+                        <!-- Login -->
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                
+                                <!-- Etiqueta del campo -->
+                                <label for="usuario" class="form-label">Usuario</label>
+                
+                                <!-- El input asociado al campo  -->
+                                <input id="usuario" name="usuario" 
+                                       type="text" 
+                                       class="form-control" 
+                                >
+                                <!-- Para mostrar errores -->                
+                                <div class="invalid-feedback"></div>                
+                            </div>
+                        </div>
+                
+                        <!-- Apellidos del contacto -->
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                
+                                <!-- Etiqueta del campo -->
+                                <label for="password" class="form-label">Password</label>
+                
+                                <!-- El input asociado al campo  -->
+                                <input id="password" name="password" 
+                                       type="text" 
+                                       class="form-control" 
+                                >
+                                <!-- Para mostrar errores -->                
+                                <div class="invalid-feedback"></div>                
+                            </div>
+                        </div>                        
+                    </div>            
+                </div>
+                <div class="modal-footer">
+                    <button id="loginBotonAceptar" type="button" class="btn btn-primary">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>    
 </body>
 </html>

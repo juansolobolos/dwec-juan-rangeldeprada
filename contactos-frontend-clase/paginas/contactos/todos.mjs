@@ -164,34 +164,49 @@ function onPaginaCambiada(numeroPagina) {
  * Esta función se invoca cuando se ha creado un nuevo contacto
  */
 function onContactoCreado() {
+  console.log("onContactoCreado");
 
   // MODIFICADO Llama a recargar la página de contactos actual
   refrescarContactos();
+
+  // Oculta la ventana modal
+  ventanaModal.ocultarVentanaModal();
 }
 
 /** MODIFICADO
  * Esta función se invoca cuando se ha modificado un contacto
  */
 function onContactoModificado() {
+
+  console.log("onContactoModificado");
+
   refrescarContactos();
+
+  // Oculta la ventana modal
+  ventanaModal.ocultarVentanaModal();
 }
 
 //------------------------------------------------------------------------------------------
 // Funciones de utilidad
 //------------------------------------------------------------------------------------------
 function mostrarContactos(contactos) {
+    console.log("mostrarContactos");
+  
     $("#tablaContactos").empty();
     $("#tablaContactos").json2html(contactos, plantilla);
 
     // MODIFICADO deja guardados los contactos que se han cargado
     // Esto lo hace para facilitar la modificación.
     tablaContactos = contactos;
+    console.log(contactos);
 }
 
 /** MODIFICADO
  * Recarga la página actual de contactos. Carga la página cargada actualmente.
  */
 function refrescarContactos() {  
+
+  console.log("Refrescar contactos");
   cargarContactos(numeroPaginaActual);
 }
 
@@ -201,6 +216,9 @@ function refrescarContactos() {
  * @param {*} numeroPagina 
  */
 function cargarContactos(numeroPagina = 1) {  
+  
+  console.log("Cargar contactos");
+
   if(filtroBusqueda.length == 0) {
     // Muestra todos los contactos
     contactos.getTodos(

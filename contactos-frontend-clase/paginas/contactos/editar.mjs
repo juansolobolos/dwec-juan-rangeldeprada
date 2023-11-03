@@ -93,20 +93,22 @@ function inicializarFormulario() {
             // Notifica que se ha creado o modificado un nuevo contacto
             if(!editando) {
                 // Crea el contacto en la base de datos. Recibe el objeto a almacenar
-                contactos.crearContacto(contactoFormulario, () => {}, () => {});
-
-                // Notifica que se ha hecho un alta
-                onAlta(contactoFormulario);
+                contactos.crearContacto(contactoFormulario, () => {
+                    
+                    // RETO Notifica que se ha hecho un alta
+                    onAlta(contactoFormulario);
+                }, () => {});
             } else {
 
                 // Pone el identificador en el contacto
                 contactoFormulario.id = contacto.id;
 
                 // Actualiza el contacto
-                contactos.actualizarContacto(contactoFormulario, () => {}, () => {});
+                contactos.actualizarContacto(contactoFormulario, () => {
 
-                // Notifica que se ha modificado un contacto
-                onModificacion(contactoFormulario);
+                    // RETO Notifica que se ha modificado un contacto
+                    onModificacion(contactoFormulario);
+                }, () => {});
             }
         },
 

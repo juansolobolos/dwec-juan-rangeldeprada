@@ -30,7 +30,14 @@ function get(url, onOk, onError, pagina, registrosPorPagina) {
         url = `${url}&_limit=${registrosPorPagina}`;
     }
 
-    fetch(url)
+    fetch(
+        url, 
+        {
+            headers: {
+                "Authorization": getAuthenticationHeader()
+            }
+        },
+    )
     .then(response => response.text())
     .then(texto => {          
 
@@ -39,7 +46,7 @@ function get(url, onOk, onError, pagina, registrosPorPagina) {
   
         // Entregamos los datos al invocador
         onOk(datos);
-  });      
+    });      
 
 }
 
@@ -54,7 +61,10 @@ function del(url, onOk, onError) {
     fetch(
         url,
         {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                "Authorization": getAuthenticationHeader()
+            }
         }
     ) 
     .then(respuesta => onOk());      
@@ -74,7 +84,8 @@ function post(url, objeto, onOk, onError) {
         {
             method: 'POST',
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": getAuthenticationHeader()   
             },
             body: JSON.stringify(objeto)
         }
@@ -96,10 +107,12 @@ function put(url, objeto, onOk, onError) {
         {
             method: 'PUT',
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": getAuthenticationHeader()  
             },
             body: JSON.stringify(objeto)
         }
     ) 
     .then(respuesta => onOk());      
 }
+

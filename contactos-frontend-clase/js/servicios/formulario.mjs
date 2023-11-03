@@ -1,4 +1,6 @@
 
+import * as validaciones from '/js/servicios/validaciones.mjs';
+
 export {
     inicializarFormulario
 }
@@ -22,7 +24,10 @@ function inicializarFormulario(idFormulario, onSubmit, objeto = null) { // MODIF
 
     // MODIFICADO
     // Guarda las funcions callback de las acciones
-    formulario.onSubmit = onSubmit;
+    formulario.onSubmitCallback = onSubmit;
+
+    // Limpia los errores
+    limpiarErrores(formulario);
 
     // MODIFICADO carga los datos en el formulario
     if(objeto) {
@@ -32,10 +37,13 @@ function inicializarFormulario(idFormulario, onSubmit, objeto = null) { // MODIF
         formulario.reset();
     }
     
-
     // Asigna los gestores de eventos
-    // MODIFICADO
+    // Submit al formulario
+    $('#'+idFormulario).unbind('submit');
     $('#'+idFormulario).on('submit', onSubmitEventReceived);
+
+    // Asigna evento para gestionar la salida de cada campo
+    $(formulario).on('blur', '[validacion]', fValidarCampo);
 }
 
 //-------------------------------------------------------------------------
@@ -55,21 +63,8 @@ function onSubmitEventReceived(evento) {
     // Evita que se envíe el formulario
     evento.preventDefault();
 
-    // Prepara objeto para envío al servidor
-    const objeto = {};
-    
-    // Carga en el objeto los valores de los campos en el form
-    cargarAtributosDesdeFormulario(formulario, objeto);
-    
-    // Muestra el objeto que va a enviar al servidor
-    console.log(objeto);
-
-    // Enviar información al servidor
-    // MODIFICADO
-    formulario.onSubmit(objeto);
-
-    // TODO submit realizado o no realizado correctamente
-    console.log("Datos guardados");
+    // Llama a validar el formulario. Si el formulario estuviera ok, no se enviará.
+    fValidarFormulario(formulario);
 }
 
 //-------------------------------------------------------------------------
@@ -111,4 +106,169 @@ function inicializarCamposDesdeObjeto(formulario, objeto) {
     }
 
 }
+
+
+/**
+ * Envía los datos del formulario
+ * 
+ * @param {*} formulario 
+ */
+function enviarFormulario(formulario) {
+    
+    // Prepara objeto para envío al servidor
+    const objeto = {};
+    
+    // Carga en el objeto los valores de los campos en el form
+    cargarAtributosDesdeFormulario(formulario, objeto);
+    
+    // Muestra el objeto que va a enviar al servidor
+    console.log(objeto);
+
+    // Enviar información al servidor
+    // MODIFICADO
+    formulario.onSubmitCallback(objeto);
+
+    // TODO submit realizado o no realizado correctamente
+    console.log("Datos guardados");
+}
+
+
+//---------------------------------------------------------------------------------
+// Validación de formulario
+//---------------------------------------------------------------------------------
+/**
+ * Lleva a cabo una valicación del formulario.
+ * Soporta la realización de validaciones de servidor
+ * 
+ * @param {*} formulario Formulario a validar
+ */
+function fValidarFormulario(formulario) {
+
+    (async function () {
+
+        // Limpia los mensajes de error que pudiéramos tener
+        limpiarErrores(formulario);
+
+        // En primer lugar, comprueba si se cumplen las restricciones de formulario. Por ejemplo, 
+        // si todos los campos requeridos están incluidos
+        formulario.checkValidity(); 
+
+        // Errores que han ocurrido. Se inicializa a cero
+        let numeroErrores = 0;
+
+        // Obtener todos los campos en el formulario que tienen validacion
+        // Y validarlos. Utiliza para ello un selector CSS específico
+        const elementos = formulario.querySelectorAll("[validacion]");
+        for(const e of elementos) {
+                
+            // Valida un campo
+            numeroErrores += await validarElemento(e);
+        }
+
+        // Si no hay errores, envía el formulario
+        if(numeroErrores == 0) {                        
+            // Si no usara AJAX, haría esto, pero al usar AJAX se hace necesario
+            // hacer el envío de datos de otro modo
+            // formulario.alta.value = '1';
+            // formulario.submit();
+
+            // Envía los datos del formulario
+            enviarFormulario(formulario);
+        } else {
+            
+            // Si hay errores, marca que se ha validado. De este modo se marcan 
+            // los campos con errores. Esto lo hace            
+            // añadiendo la clase indicando que ya se ha validado el formulario
+            formulario.classList.add('was-validated');
+        }
+    })();
+}
+
+
+//---------------------------------------------------------------------------------
+// Validación de campos
+//---------------------------------------------------------------------------------
+
+/**
+ * Valida el campo sobre el que se ha producido el evento
+ * 
+ * @param {*} evento 
+ */
+function fValidarCampo(evento) {
+    
+    // Obtiene el elemento sobre el que se ha lanzado el evento y llama
+    // a realizar la validación
+    validarElemento(evento.target);
+}
+
+/**
+ * Valida un campo recibido como argumento y muestra el error que corresponda
+ * 
+ * @param {*} e elemento html que contiene el dato a validar. Puede ser un input
+ */
+async function validarElemento(e) {
+    
+    let numeroErrores = 0;
+
+    try {
+
+        // Elimina el error 
+        $(e).removeClass('is-invalid');
+
+        // Validación que se aplicaría al campo
+        const validacion = e.attributes['validacion'].value;
+
+        if(validacion) {
+            // Valor en el campo
+            const valor = e.value;
+
+            // Obtengo el nombre de la validación
+            const funcionValidacion = eval(`validaciones.${validacion}`);
+
+            // Invoca a la validación y obtiene el resultado
+            await funcionValidacion(valor, e);
+        }
+    } catch(exception) {
+         
+        // Si no pasa la validación
+         mostrarError(e, exception);
+         numeroErrores++;
+    }
+   
+    // Retorna el número de errores encontrados
+    return numeroErrores;
+}
+
+
+
+//---------------------------------------------------------------------------------
+// Funciones de utilidad relacionadas con el formulario y el GUI
+//---------------------------------------------------------------------------------
+/**
+ * Limpia los errores del formulario
+ * 
+ * @param {} formulario la referencia al formulario a lumpiar
+ */
+function limpiarErrores(formulario) {
+    
+    // Marca que el formulario no se ha validado
+    formulario.classList.remove('was-validated');
+
+    // Marca todos los elementos como válidos
+    formulario.querySelectorAll("input[validacion]").forEach((elemento) => {
+        $(elemento).removeClass('is-invalid');
+    });        
+}
+
+
+/**
+ * Muestra un mensaje de error
+ * 
+ * @param {*} error 
+ */
+function mostrarError(elemento, error) {
+    $(elemento).addClass('is-invalid');
+    $('#'+elemento.id+' + .invalid-feedback').text(error);
+}
+
 
