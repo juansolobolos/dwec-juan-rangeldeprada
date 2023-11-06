@@ -369,6 +369,11 @@
       "email": "paco@mail.com",
       "password": "$2a$10$NtByBEzddWZ9bW4TQbX2xe/HGduULQu6c.j2OyVZOjyEm.MH7HpQO",
       "id": 2
+    },
+    {
+      "email": "juansolobolos@gmail.com",
+      "password": "$2a$10$YPC/tmuRbzlpWUcetOSg6.JsO57rBLw5qjm24tR9XKErD3L6RL1x6",
+      "id": 3
     }
   ]
 }
