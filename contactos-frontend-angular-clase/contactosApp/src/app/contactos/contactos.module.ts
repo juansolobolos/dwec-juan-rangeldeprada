@@ -5,13 +5,15 @@ import { ContactosRoutingModule } from './contactos-routing.module';
 import { ListadoComponent } from './pages/listado/listado.component';
 import { EditarComponent } from './pages/editar/editar.component';
 import { VerComponent } from './pages/ver/ver.component';
+import { ContactoComponentComponent } from './components/contacto.component/contacto.component.component';
 
 
 @NgModule({
   declarations: [
     ListadoComponent,
     EditarComponent,
-    VerComponent
+    VerComponent,
+    ContactoComponentComponent
   ],
   imports: [
     CommonModule,
