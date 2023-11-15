@@ -5,7 +5,7 @@ import { ContactosRoutingModule } from './contactos-routing.module';
 import { ListadoComponent } from './pages/listado/listado.component';
 import { EditarComponent } from './pages/editar/editar.component';
 import { VerComponent } from './pages/ver/ver.component';
-import { ContactoComponentComponent } from './components/contacto.component/contacto.component.component';
+import { ContactoComponent } from './components/contacto.component/contacto.component';
 
 
 @NgModule({
@@ -13,7 +13,7 @@ import { ContactoComponentComponent } from './components/contacto.component/cont
     ListadoComponent,
     EditarComponent,
     VerComponent,
-    ContactoComponentComponent
+    ContactoComponent
   ],
   imports: [
     CommonModule,
