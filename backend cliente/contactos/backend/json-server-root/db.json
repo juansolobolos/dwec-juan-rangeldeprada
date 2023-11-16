@@ -1,4 +1,20 @@
 {
+  "libros": [
+    {
+      "titulo": "La historia interminable",
+      "formato": "libro",
+      "editorial": "alfaguara",
+      "paginas": 496,
+      "isbn": 9788420471549
+    },
+    {
+      "titulo": "Spiderman volumen 1",
+      "formato": "comic",
+      "editorial": "marvel",
+      "paginas": 24,
+      "isbn": 2
+    }
+  ],
   "contactos": [
     {
       "nombre": "Paco",
