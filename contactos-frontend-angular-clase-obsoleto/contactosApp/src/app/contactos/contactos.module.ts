@@ -6,6 +6,7 @@ import { ListadoComponent } from './pages/listado/listado.component';
 import { EditarComponent } from './pages/editar/editar.component';
 import { VerComponent } from './pages/ver/ver.component';
 import { ContactoComponent } from './components/contacto.component/contacto.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { ContactoComponent } from './components/contacto.component/contacto.comp
   ],
   imports: [
     CommonModule,
-    ContactosRoutingModule
+    ContactosRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class ContactosModule { }
