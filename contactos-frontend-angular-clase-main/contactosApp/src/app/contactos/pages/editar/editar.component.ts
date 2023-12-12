@@ -57,9 +57,9 @@ export class EditarComponent {
 
     private dialogService     : DialogService,
     
-    private contactosService  : ContactosService
+    private contactosService  : ContactosService,
 
-    //private validacionService       : ValidacionService,
+    private validacionService       : ValidacionService,
     //private validacionContactosService : ValidacionContactosService
 
   ) { }

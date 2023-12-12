@@ -6,11 +6,7 @@ import { VerComponent } from './pages/ver/ver.component';
 import { Listado2Component } from './pages/listado2/listado2.component';
 
 const routes: Routes = [
-  {
-    // No es necesario especificar nada en este atributo
-    // Ya que estamos definiendo rutas hijas.
-    path: '',
-    children: [
+  
       {
         // tareas/listado
         path: 'listado',
@@ -44,8 +40,8 @@ const routes: Routes = [
         path: '**',
         redirectTo: 'listado'
       }
-    ]
-  }  
+    
+  
 ];
 
 @NgModule({
